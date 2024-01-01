@@ -3,6 +3,7 @@ import * as path from 'path';
 
 import { Migrator, FileMigrationProvider } from 'kysely';
 
+import { env } from '@/config';
 import { db } from '@/database';
 
 // ANSI escape codes for colors
@@ -13,16 +14,16 @@ const colors = {
   reset: '\x1b[0m',
 };
 
-async function migrateToLatest() {
-  const migrationFolderPath =
-    process.env.MIGRATION_FOLDER_PATH || path.join(__dirname, 'migrations');
+async function migrate() {
+  const migrationFolder =
+    env.MIGRATION_FOLDER_PATH ?? path.join(__dirname, 'migrations');
 
   const migrator = new Migrator({
     db,
     provider: new FileMigrationProvider({
       fs,
       path,
-      migrationFolder: migrationFolderPath,
+      migrationFolder,
     }),
   });
 
@@ -63,4 +64,4 @@ async function migrateToLatest() {
   }
 }
 
-migrateToLatest();
+void migrate();

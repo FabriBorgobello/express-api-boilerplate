@@ -6,7 +6,7 @@ import helmet from 'helmet';
 import morgan from 'morgan';
 
 import { env } from '@/config';
-import { productRouter } from '@/product/product.route';
+import { productRouter } from '@/modules/product/product.route';
 import { errorHandler } from '@/utils/errorHandler';
 
 const app = express();

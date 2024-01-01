@@ -117,4 +117,4 @@ async function seed() {
   await db.destroy();
 }
 
-seed();
+void seed();

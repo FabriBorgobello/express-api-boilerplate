@@ -8,6 +8,7 @@ export const envSchema = z.object({
   POSTGRES_PASSWORD: z.string(),
   POSTGRES_PORT: z.string().default('5432'),
   POSTGRES_HOST: z.string().default('localhost'),
+  MIGRATION_FOLDER_PATH: z.string().optional(),
 });
 
 /**
