@@ -7,7 +7,9 @@
     "dev": "tsx watch ./src/index.ts",
     "build": "tsc",
     "start": "node dist/index.js",
-    "lint": "eslint . --ext .ts --fix"
+    "lint": "eslint . --ext .ts --fix",
+    "db:migrate": "tsx --env-file=.env ./src/database/migrator.ts",
+    "db:seed": "tsx --env-file=.env ./src/database/seeder.ts"
   },
   "keywords": [],
   "author": "",
@@ -20,7 +22,8 @@
     "kysely": "^0.27.0",
     "morgan": "^1.10.0",
     "pg": "^8.11.3",
-    "zod": "^3.22.4"
+    "zod": "^3.22.4",
+    "zod-validation-error": "^2.1.0"
   },
   "devDependencies": {
     "@types/cors": "^2.8.17",
