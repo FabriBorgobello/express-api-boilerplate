@@ -1,3 +1,12 @@
+/**
+ * Custom error class for HTTP status code
+ * @param message Error message
+ * @param status HTTP status code
+ * @example
+ * throw new ApiError('Not found', 404);
+ * throw new ApiError('Bad Request', 400);
+ */
+
 export class ApiError extends Error {
   constructor(message: string, public status: number) {
     super(message);

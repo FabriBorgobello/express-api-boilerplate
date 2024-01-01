@@ -1,4 +1,5 @@
 import { NextFunction, Request, Response } from 'express';
+import { z } from 'zod';
 
 import { ProductCreateSchema, ProductUpdateSchema } from './product.schema';
 
@@ -28,7 +29,7 @@ export class ProductController {
   }
   async getOne(req: Request, res: Response, next: NextFunction) {
     try {
-      const id = Number(req.params.id);
+      const id = z.coerce.number().parse(req.params.id);
       const result = await db
         .selectFrom('product')
         .where('id', '=', id)
@@ -42,7 +43,7 @@ export class ProductController {
 
   async update(req: Request, res: Response, next: NextFunction) {
     try {
-      const id = Number(req.params.id);
+      const id = z.coerce.number().parse(req.params.id);
       const updateWith = ProductUpdateSchema.parse(req.body);
       const result = await db
         .updateTable('product')
@@ -57,13 +58,13 @@ export class ProductController {
   }
   async delete(req: Request, res: Response, next: NextFunction) {
     try {
-      const id = Number(req.params.id);
+      const id = z.coerce.number().parse(req.params.id);
       await db
         .deleteFrom('product')
         .where('id', '=', id)
         .returningAll()
         .executeTakeFirstOrThrow();
-      res.status(204);
+      res.sendStatus(204);
     } catch (error) {
       next(error);
     }
