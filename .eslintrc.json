@@ -18,12 +18,26 @@
     "import/order": [
       "error",
       {
-        "groups": ["builtin", "external", "internal", "parent", "sibling", "index"],
+        "groups": [
+          "builtin",
+          "external",
+          "internal",
+          "parent",
+          "sibling",
+          "index"
+        ],
         "newlines-between": "always",
         "alphabetize": {
           "order": "asc",
           "caseInsensitive": true
         }
+      }
+    ],
+    "no-restricted-syntax": [
+      "error",
+      {
+        "selector": "MemberExpression[object.name='process'][property.name='env']",
+        "message": "Direct use of process.env is not allowed. Use the type safe 'env' from '@/config' instead. Example: import { env } from '@/config'"
       }
     ]
   }
